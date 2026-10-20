@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xinghuozhimen Games Ltd | Cinematic iOS Games & Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables & Cinematic Game Studio Dark Theme --- */
+        :root {
+            --bg-main: #0a0a0a; /* Deep Black */
+            --bg-surface: #121212; /* Very Dark Gray */
+            --bg-card: #1a1a1a; /* Dark Gray */
+            --color-primary: #f97316; /* Spark Orange */
+            --color-primary-glow: rgba(249, 115, 22, 0.3);
+            --color-secondary: #eab308; /* Cinematic Amber */
+            --text-main: #fafafa; /* Off-White */
+            --text-muted: #a3a3a3; /* Neutral Gray */
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-lg: 16px;
+            --radius-sm: 8px;
+            --max-width: 1100px;
+            --transition-speed: 0.3s;
+        }
+
+        /* --- Global Resets & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(234, 179, 8, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .cite-ref {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            vertical-align: super;
+            margin-left: 2px;
+            user-select: none;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 140px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #fff 0%, #d4d4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Header Navigation --- */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .brand-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .brand-logo svg {
+            color: var(--color-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-main);
+        }
+
+        /* --- 1. Hero Section --- */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #fff 0%, #a3a3a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 36px;
+            background: var(--color-primary);
+            color: #000;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 15px var(--color-primary-glow);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #fdba74;
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        /* --- 2. About Section --- */
+        .about-section {
+            background-color: var(--bg-surface);
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            padding: 60px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .about-card strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- 3. Services --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .service-box {
+            background: var(--bg-card);
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.02);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.3);
+            background: #262626;
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            color: var(--color-primary);
+            margin-bottom: 24px;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .service-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+
+        .service-box p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* --- 4. Contact Section --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .form-area {
+            padding: 60px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--color-primary);
+            color: #000;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            width: 100%;
+            transition: background var(--transition-speed) ease;
+        }
+
+        .submit-btn:hover {
+            background: #fdba74;
+        }
+
+        .info-area {
+            background: rgba(249, 115, 22, 0.05);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-item {
+            margin-bottom: 32px;
+        }
+
+        .info-item h4 {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .info-item p, .info-item a {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .info-item a:hover {
+            color: var(--color-primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--bg-main);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 60px 0 40px;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .contact-layout { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                XINGHUOZHIMEN GAMES
+            </a>
+            <nav class="nav-menu">
+                <a href="#about">Studio Profile</a>
+                <a href="#services">Software Publishing</a>
+                <a href="#contact">Developer Connect</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Publishing cinematic<br>interactive experiences.</h1>
+            <p>XINGHUOZHIMEN GAMES LIMITED<span class="cite-ref">[cite: 19]</span> is a Northern Ireland-based interactive studio specializing in premium mobile game development, interactive media, and iOS software publishing.</p>
+            <a href="#contact" class="btn-primary">Initialize Partnership</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Mission.</h2>
+                <p class="section-subtitle">Bridging motion picture storytelling with robust system architectures.</p>
+            </div>
+            <div class="about-card">
+                Headquartered in BELFAST, NORTHERN IRELAND, United Kingdom<span class="cite-ref">[cite: 19]</span>, <strong>XINGHUOZHIMEN GAMES LIMITED</strong><span class="cite-ref">[cite: 19]</span> operates as a premier interactive digital product studio. Operating at the intersection of the Software Publishers industry<span class="cite-ref">[cite: 19]</span> and the Motion Picture and Video Industries<span class="cite-ref">[cite: 19]</span>, we engineer high-performance cinematic mobile games and interactive entertainment applications. Our unique approach seamlessly integrates immersive video production<span class="cite-ref">[cite: 19]</span> with advanced iOS technical frameworks, allowing us to build and publish reliable digital platforms from initial conceptualization to final App Store deployment.
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section-padding" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Capabilities.</h2>
+                <p class="section-subtitle">A comprehensive suite of interactive media and publishing services.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                            <circle cx="6" cy="12" r="1"></circle>
+                            <circle cx="10" cy="12" r="1"></circle>
+                            <circle cx="14" cy="12" r="1"></circle>
+                            <circle cx="18" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    <h3>Prepackaged Software Services</h3>
+                    <p>Executing our mandate in Prepackaged software services<span class="cite-ref">[cite: 19]</span>, we distribute highly optimized, story-driven iOS applications. We manage the complete commercial release lifecycle, ensuring strict code compliance and App Store metadata optimization.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                            <line x1="7" y1="2" x2="7" y2="22"></line>
+                            <line x1="17" y1="2" x2="17" y2="22"></line>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <line x1="2" y1="7" x2="7" y2="7"></line>
+                            <line x1="2" y1="17" x2="7" y2="17"></line>
+                            <line x1="17" y1="17" x2="22" y2="17"></line>
+                            <line x1="17" y1="7" x2="22" y2="7"></line>
+                        </svg>
+                    </div>
+                    <h3>Cinematic Interactive Media</h3>
+                    <p>Leveraging our classification in Motion picture/video production<span class="cite-ref">[cite: 19]</span>, we craft immersive, narrative-focused games utilizing advanced full-motion video (FMV) and real-time cinematic rendering techniques optimized for Apple silicon.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Business Support Services</h3>
+                    <p>As a provider of Business Support Services<span class="cite-ref">[cite: 19]</span>, we offer backend infrastructure and technical publishing support to independent studios, ensuring their games reach the App Store with secure data synchronization and cloud scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Developer Support.</h2>
+                <p class="section-subtitle">Initiate a dialogue regarding game publishing, interactive media, or technical consulting.</p>
+            </div>
+            
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="form-area">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Organization / Developer Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Contact Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Software Project Details</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Transmit Request</button>
+                    </form>
+                </div>
+
+                <!-- Contacts Info -->
+                <div class="info-area">
+                    <div class="info-item">
+                        <h4>Studio Headquarters</h4>
+                        <p>OFFICE 98, 92 CASTLE STREET, AREA 1/1<br>BELFAST NORTHERN IRELAND, BT1 1HE<span class="cite-ref">[cite: 19]</span><br>United Kingdom<span class="cite-ref">[cite: 19]</span></p>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>Digital Comm Node</h4>
+                        <a href="mailto:admin@xinghuozhimengames.space">admin@xinghuozhimengames.space</a>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>Industry Registry</h4>
+                        <p>Software Publishers / Motion Picture & Video<span class="cite-ref">[cite: 19]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 XINGHUOZHIMEN GAMES LIMITED. All rights reserved. Registered Software Publishers.</p>
+            <span class="footer-duns" style="display:block; margin-top: 10px; color: #a3a3a3; font-size: 0.8rem;">Reference: image_2671fc.png<span class="cite-ref">[cite: 19]</span></span>
+        </div>
+    </footer>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
